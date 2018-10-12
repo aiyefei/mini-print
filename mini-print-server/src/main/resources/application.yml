@@ -1,0 +1,5 @@
+
+server:
+  port: 8888
+  datacenter: 0
+  workerId: 0

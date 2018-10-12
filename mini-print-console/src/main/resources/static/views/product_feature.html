@@ -1,0 +1,97 @@
+<!-- Modal -->
+<div ng-controller="ProductFeatureCtrl">
+	<div class="modal fade" id="productFeatureModal" tabindex="-1"
+		role="dialog" aria-labelledby="featureModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="featureModalLabel">产品配置</h4>
+					<input type="hidden" id="productid" />
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<button type="button" class="btn btn-success"
+										ng-click="createProductFeature()">新增配置</button>
+								</div>
+
+								<!-- /.panel-heading -->
+								<div class="panel-body">
+									<div class="dataTable_wrapper">
+										<table class="table table-striped table-bordered table-hover"
+											id="productFeatureTable" style="width: 100%">
+											<thead>
+												<tr>
+													<th data-field="feature_type">特征参数</th>
+													<th data-field="feature_value">参数值</th>
+													<th data-field="id">操作</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="productFeatureEditModal" tabindex="-1"
+		role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="editModalLabel">产品特征编辑</h4>
+				</div>
+				<div class="modal-body">
+					<form name="productFeatureForm" class="form-horizontal" novalidate>
+						<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+
+						<div class="form-group"
+							ng-class="{ 'has-error' : productFeatureForm.feature_type.$invalid && !productFeatureForm.feature_type.$pristine }">
+							<label for="feature_type" class="col-sm-3 control-label">特征参数</label>
+							<div class="col-sm-6">
+								<select class="form-control" name="feature_type"
+									ng-model="productFeature.feature_type" required>
+									<option value="">请选择</option>
+									<option ng-repeat="x in featureTypes" value="{{x.code}}">{{x.text}}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group"
+							ng-class="{ 'has-error' : productFeatureForm.feature_value.$invalid && !productFeatureForm.feature_value.$pristine }">
+							<label for="feature_value" class="col-sm-3 control-label">参数值</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" name="feature_value"
+									ng-model="productFeature.feature_value">
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+						ng-click="saveProductFeature()"
+						ng-disabled="productFeatureForm.$invalid">保存</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</div>

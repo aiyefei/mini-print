@@ -1,0 +1,69 @@
+<div id="wrapper">
+
+        <!-- Navigation -->
+            
+        <header></header>
+        <!-- /.navbar-top-links -->
+          
+        <!-- /.navbar-static-side -->
+
+            <div id="page-wrapper" style="min-height: 561px;">
+            <!-- Loader template -->
+                <div ui-view></div>
+            </div>
+            <!-- /#page-wrapper -->
+            
+            <!-- Modal -->
+		<div class="modal fade" id="passwordModal" tabindex="-1" role="dialog"
+			aria-labelledby="editPassModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="editPassModalLabel">修改密码</h4>
+					</div>
+					<div class="modal-body">
+						<form name="passwordForm" class="form-horizontal" novalidate>
+							<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+							<div class="form-group"
+								ng-class="{ 'has-error' : passwordForm.oldPassword.$invalid && !passwordForm.oldPassword.$pristine }">
+								<label for="oldPassword" class="col-sm-3 control-label">原密码</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" name="oldPassword" ng-model="pass.oldPassword"
+										placeholder="请输入原密码" required>
+								</div>
+							</div>
+							
+							<div class="form-group"
+								ng-class="{ 'has-error' : passwordForm.newPassword.$invalid && !passwordForm.newPassword.$pristine }">
+								<label for="newPassword" class="col-sm-3 control-label">新密码</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" name="newPassword" ng-model="pass.newPassword"
+										placeholder="请输入新密码(6到20位)" ng-minlength="6" equals="{{pass.newPassword2}}"
+                    					ng-maxlength="20" required>
+								</div>
+							</div>
+							
+							<div class="form-group"
+								ng-class="{ 'has-error' : passwordForm.newPassword2.$invalid && !passwordForm.newPassword2.$pristine }">
+								<label for="newPassword2" class="col-sm-3 control-label">确认新密码</label>
+								<div class="col-sm-9">
+									<input type="password" class="form-control" name="newPassword2" ng-model="pass.newPassword2"
+										placeholder="请再次输入新密码" equals="{{pass.newPassword}}" required>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary"
+							ng-click="savePassword()" ng-disabled="passwordForm.$invalid">保存</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+    </div>

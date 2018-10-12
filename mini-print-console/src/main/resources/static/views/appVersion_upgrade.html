@@ -1,0 +1,155 @@
+<!-- Modal -->
+<div ng-controller="AppVersionUpgradeCtrl">
+	<div class="modal fade" id="appVersionUpgradeModal" tabindex="-1"
+		role="dialog" aria-labelledby="upgradeModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="upgradeModalLabel">app版本升级</h4>
+					<input type="hidden" id="id" />
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<button type="button" class="btn btn-success"
+										ng-click="createAppVersionUpgrade()">发布升级</button>
+								</div>
+
+								<!-- /.panel-heading -->
+								<div class="panel-body">
+									<div class="dataTable_wrapper">
+										<table class="table table-striped table-bordered table-hover"
+											id="appVersionUpgradeTable" style="width: 100%">
+											<thead>
+												<tr>
+													<th class="text-center" data-field="versionName" data-sort-name="versionName" data-sortable="true">版本名称</th>
+													<th class="text-center" data-field="versionContext" data-sort-name="versionContext" data-sortable="true">版本内容</th>
+													<th class="text-center" data-field="version" data-sort-name="version" data-sortable="true">版本</th>
+													<th class="text-center" data-field="type" data-sort-name="type" data-sortable="true">类型</th>
+													<th class="text-center" data-field="minVersion" data-sort-name="minVersion" data-sortable="true">最低版本</th>
+													<th class="text-center" data-field="downloadUrl" data-sort-name="downloadUrl" data-sortable="true">下载地址</th>
+												</tr>
+											</thead>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+
+	<!--Modal -->
+	<div class="modal fade" id="appVersionUpgradeEditModal" tabindex="-1"
+		 role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="editModalLabel">发布升级</h4>
+					<h6>当前的 IOS 最高版本为: <span id="iosHighestVersion" style="color: blue;"></span>,
+					 Andorid 最高版本为: <span id="androidHighestVersion" style="color: blue;"></span></h6>
+				</div>
+				<div class="modal-body">
+					<form name="appVersionForm" class="form-horizontal" novalidate>
+						<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+						<input type="hidden" name="id" ng-model="appVersion.id" />
+
+						<div class="form-group">
+							<label for="version" class="col-sm-3 control-label">版本号</label>
+							<div class="col-sm-6">
+
+								<p class="form-control-static " id="version_"></p>
+
+							</div>
+						</div>
+
+						<div class="form-group"
+							 ng-class="{ 'has-error' : appVersionForm.versionName.$invalid && !appVersionForm.versionName.$pristine }">
+							<label for="versionName" class="col-sm-3 control-label">版本名称</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" name="versionName"
+									   ng-model="appVersion.versionName" required>
+							</div>
+						</div>
+
+						<div class="form-group"
+							 ng-class="{ 'has-error' : appVersionForm.minVersion.$invalid && !appVersionForm.minVersion.$pristine }">
+							<label for="minVersion" class="col-sm-3 control-label">最低版本</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" name="minVersion"
+									   ng-model="appVersion.minVersion" required>
+							</div>
+
+						</div>
+						<div class="form-group">
+							<span style="color: red; float: right; margin-right: 18px; font-size: 8px;">注: 强制升级要求注明最低版本</span>
+						</div>
+
+
+						<div class="form-group">
+							<label for="type" class="col-sm-3 control-label">升级类型</label>
+							<div class="col-sm-6">
+								<p class="form-control-static " id="typeName"></p>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="file" class="col-sm-3 control-label">升级文件</label>
+							<div class="col-sm-6">
+								<!--<a ng-href="{{appVersion.downloadUrl}}" ng-show="appVersion.downloadUrl">{{appVersion.downloadUrl}}</a>-->
+								<button class="button" ngf-select="uploadUpgradeFile($file)" ngf-max-size="100MB">选择文件</button>
+								<br /> <br />
+								<div class="progress" ng-show="upgradeProgress > 0">
+									<div class="progress-bar" role="progressbar"
+										 aria-valuenow="{{upgradeProgress}}" aria-valuemin="0"
+										 aria-valuemax="100" style="width: {{upgradeProgress}}%">
+										<span class="sr-only">{{upgradeProgress}}% 完成</span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="downloadUrl" class="col-sm-3 control-label">升级URL</label>
+							<div class="col-sm-9">
+								<input type="url" id="downloadUrl" class="form-control" name="downloadUrl"
+									   ng-model="appVersion.downloadUrl" required>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label for="versionContext" class="col-sm-3 control-label">升级说明</label>
+							<div class="col-sm-9">
+									<textarea class="form-control" name="versionContext"
+											  ng-model="appVersion.versionContext" rows="3" placeholder="请输入升级版本内容" required></textarea>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary"
+							ng-click="saveAppVersion()"
+							ng-disabled="appVersionForm.$invalid">发布</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+
+	<!-- Modal -->
+	<!-- /.modal -->
+</div>

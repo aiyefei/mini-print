@@ -1,0 +1,11 @@
+server:
+  port: 9202
+  datacenter: 0
+  workerId: 0
+
+delicloud:
+  # 打印机项目
+  printer:
+    appid: 470887479843487744
+    appkey: TjB8c3TaGP0BQla6VHpJng2Y
+    endpoint: http://192.168.0.202:8003/gateway

@@ -1,0 +1,137 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">打印机管理</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<!--<button type="button" class="btn btn-success"-->
+					<!--ng-click="createPrinter()">新增打印机</button>-->
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover"
+						id="tmPrinterTable">
+						<thead>
+						<!--printerSn, printerName, printerType, workStatus, onlineStatus, firmwareVersion, inkboxSn, inkboxStatus, orgId						-->
+							<tr>
+								<th data-field="printerSn" data-sort-name="printerSn" data-sortable="true">打印机SN</th>
+								<th data-field="printerName" data-sort-name="printerName" data-sortable="true">打印机名称</th>
+								<th data-field="printerType" data-sort-name="printerType" data-sortable="true">打印机类型</th>
+								<th data-field="workStatus" data-sort-name="workStatus" data-sortable="true">打印机工作状态</th>
+								<th data-field="onlineStatus" data-sort-name="onlineStatus" data-sortable="true">打印机在线状态</th>
+								<th data-field="firmwareVersion" data-sort-name="firmwareVersion" data-sortable="true">固件版本</th>
+								<th data-field="inkboxSn" data-sort-name="inkboxSn" data-sortable="true">墨水箱SN</th>
+								<th data-field="inkboxStatus" data-sort-name="inkboxStatus" data-sortable="true">墨水箱状态</th>
+								<th data-field="orgId" data-sort-name="orgId" data-sortable="true">设备组织绑定状态</th>
+								<!--<th data-field="id">操作</th>-->
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+
+		 <!--Modal-->
+		<div class="modal fade" id="tmPrinterViewModal" tabindex="-1" role="dialog"
+			aria-labelledby="editModalLabel" aria-hidden="true" style="overflow:auto">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="viewModalLabel">打印机查看</h4>
+					</div>
+					<div class="modal-body">
+						<form name="printerForm" class="form-horizontal" novalidate>
+							<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+
+							<div class="form-group">
+								<label for="printerSn" class="col-sm-3 control-label">打印机SN</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printerSn}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printerName" class="col-sm-3 control-label">打印机名称</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printerName}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printerType" class="col-sm-3 control-label">打印机类型</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printerType}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="workStatus" class="col-sm-3 control-label">打印机工作状态</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.workStatus}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="onlineStatus" class="col-sm-3 control-label">打印机在线状态</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.onlineStatus}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="firmwareVersion" class="col-sm-3 control-label">固件版本</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.firmwareVersion}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inkboxSn" class="col-sm-3 control-label">墨水箱sn</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.inkboxSn}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inkboxStatus" class="col-sm-3 control-label">墨水箱状态</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.inkboxStatus}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="orgId" class="col-sm-3 control-label">组织 id</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.orgId}}</p>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		 <!--/.modal-->
+		
+		<div ng-include="'views/device_alarm.html'"></div>
+		
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

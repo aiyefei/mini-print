@@ -1,0 +1,118 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">打印机错误统计管理</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<!--<button type="button" class="btn btn-success"-->
+					<!--ng-click="createPrinter()">新增打印机</button>-->
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover"
+						id="printerErrorInfoTable">
+						<thead>
+							<tr>
+								<th data-field="printer.printDevSn" data-sort-name="printer.printDevSn" data-sortable="true">打印机SN</th>
+								<th data-field="printStatus" data-sort-name="printStatus" data-sortable="true">打印状态</th>
+								<th data-field="errorCode" data-sort-name="errorCode" data-sortable="true">错误代码</th>
+								<th data-field="errorTime" data-sort-name="errorTime" data-sortable="true">错误时间</th>
+								<th data-field="updateTime" data-sort-name="updateTime" data-sortable="true">更新时间</th>
+								<th data-field="updateBy" data-sort-name="updateBy" data-sortable="true">更新人</th>
+								<th data-field="id">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+
+		<!-- Modal -->
+		<!--<div class="modal fade" id="printerViewModal" tabindex="-1" role="dialog"-->
+			<!--aria-labelledby="editModalLabel" aria-hidden="true" style="overflow:auto">-->
+			<!--<div class="modal-dialog">-->
+				<!--<div class="modal-content">-->
+					<!--<div class="modal-header">-->
+						<!--<button type="button" class="close" data-dismiss="modal"-->
+							<!--aria-hidden="true">&times;</button>-->
+						<!--<h4 class="modal-title" id="viewModalLabel">打印机查看</h4>-->
+					<!--</div>-->
+					<!--<div class="modal-body">-->
+						<!--<form name="printerForm" class="form-horizontal" novalidate>-->
+							<!--<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="printDevSn" class="col-sm-3 control-label">打印机SN</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.printDevSn}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="name" class="col-sm-3 control-label">设备名称</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.name}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="productName" class="col-sm-3 control-label">产品型号</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.product.name}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="name" class="col-sm-3 control-label">生产日期</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.produce_time}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="version" class="col-sm-3 control-label">固件版本</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.product_version}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="properties" class="col-sm-3 control-label">设备属性</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.properties}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+							<!---->
+							<!--<div class="form-group">-->
+								<!--<label for="name" class="col-sm-3 control-label">最近访问时间戳</label>-->
+								<!--<div class="col-sm-9">-->
+									<!--<p class="form-control-static ">{{printer.lastAccessTime}}</p>-->
+								<!--</div>-->
+							<!--</div>-->
+						<!--</form>-->
+					<!--</div>-->
+					<!--<div class="modal-footer">-->
+						<!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+					<!--</div>-->
+				<!--</div>-->
+				<!--&lt;!&ndash; /.modal-content &ndash;&gt;-->
+			<!--</div>-->
+			<!--&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+		<!--</div>-->
+		<!-- /.modal -->
+		
+		<!--<div ng-include="'views/device_alarm.html'"></div>-->
+		
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

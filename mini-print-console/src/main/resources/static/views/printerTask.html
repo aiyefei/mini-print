@@ -1,0 +1,318 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">打印任务管理</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<!--<button type="button" class="btn btn-success"-->
+					<!--ng-click="createPrinter()">新增打印机</button>-->
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover"
+						id="printerTaskTable">
+						<thead>
+							<tr>
+								<th data-field="printerSn" data-sort-name="printerSn" data-sortable="true">打印机SN</th>
+								<th data-field="taskCode" data-sort-name="taskCode" data-sortable="true">打印任务code</th>
+								<th data-field="taskType" data-sort-name="printerType" data-sortable="true">打印任务类型</th>
+								<th data-field="retryTimes" data-sort-name="retryTimes" data-sortable="true">任务重试次数</th>
+								<th data-field="userName" data-sort-name="userName" data-sortable="true">用户名称</th>
+
+								<th data-field="fileSourceName" data-sort-name="fileSourceName" data-sortable="true">文件名称</th>
+								<th data-field="fileSourceUrl" data-sort-name="fileSourceUrl" data-sortable="true">文件url</th>
+								<th data-field="id">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+
+		 <!--Modal-->
+		<div class="modal fade" id="printerTaskViewModal" tabindex="-1" role="dialog"
+			aria-labelledby="editModalLabel" aria-hidden="true" style="overflow:auto">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="viewModalLabel">打印任务查看</h4>
+					</div>
+					<div class="modal-body">
+						<form name="printerTaskForm" class="form-horizontal" novalidate>
+							<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+
+							<div class="form-group">
+								<label for="printerSn" class="col-sm-3 control-label">打印机SN</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printerSn}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="taskCode" class="col-sm-3 control-label">任务code</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.taskCode}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="taskType" class="col-sm-3 control-label">任务类型</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{taskTypeEnum[printerTask.taskType]}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="taskStatus" class="col-sm-3 control-label">任务状态</label>
+								<div class="col-sm-9">
+
+									<p class="form-control-static ">{{taskStatusEnum[printerTask.taskStatus]}}</p>
+
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="taskSource" class="col-sm-3 control-label">任务来源</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.taskSource}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="taskStartTime" class="col-sm-3 control-label">任务开始时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.taskStartTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="taskEndTime" class="col-sm-3 control-label">任务结束时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.taskEndTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="retryTimes" class="col-sm-3 control-label">任务重试次数</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.retryTimes}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="userName" class="col-sm-3 control-label">用户名称</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.userName}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="fileSourceName" class="col-sm-3 control-label">原文件名称</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.fileSourceName}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="fileSourceUrl" class="col-sm-3 control-label">原文件地址</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.fileSourceUrl}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printStartPage" class="col-sm-3 control-label">打印起始页</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printStartPage}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printEndPage" class="col-sm-3 control-label">打印结束页</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printEndPage}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="pagesPre" class="col-sm-3 control-label">每一面打多少页</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.pagesPre}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="copyCount" class="col-sm-3 control-label">打印份数</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.copyCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printDpi" class="col-sm-3 control-label">打印dpi</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printDpi}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printPageSize" class="col-sm-3 control-label">打印尺寸(A4 A5)</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printPageSize}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printColorMode" class="col-sm-3 control-label">打印颜色</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printColorMode}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="isPrintWhole" class="col-sm-3 control-label">打印方式</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printWayEnum[printerTask.isPrintWhole]}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="duplexMode" class="col-sm-3 control-label">打印模式</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{duplexModeEnum[printerTask.duplexMode]}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printStatus" class="col-sm-3 control-label">打印状态</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{taskStatusEnum[printerTask.printStatus]}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="errorCode" class="col-sm-3 control-label">错误代码</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.errorCode}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printPageCount" class="col-sm-3 control-label">打印页数</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printPageCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printedPageCount" class="col-sm-3 control-label">已打印页数</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.printedPageCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="convertStartTime" class="col-sm-3 control-label">文件转换开始时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.convertStartTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="convertEndTime" class="col-sm-3 control-label">文件转换结束时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.convertEndTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="dataStartTime" class="col-sm-3 control-label">报文转换开始时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.dataStartTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="dataEndTime" class="col-sm-3 control-label">报文转换结束时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.dataEndTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="errorTime" class="col-sm-3 control-label">发生错误时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.errorTime}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="dataDownloadUrl" class="col-sm-3 control-label">报文下载地址</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.dataDownloadUrl}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="fileSource" class="col-sm-3 control-label">文件源(CLOUD／网盘 NAS／私有云)</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.fileSource}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="fileType" class="col-sm-3 control-label">PDF 图片(jpg..)</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.fileType}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="fileSuffix" class="col-sm-3 control-label">源文件后缀</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.fileSuffix}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="filePdfUrl" class="col-sm-3 control-label">非pdf 文件转换为pdf 后的下载路径</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printerTask.filePdfUrl}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printDirection" class="col-sm-3 control-label">打印方向</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printDirectionEnum[printerTask.printDirection]}}</p>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		 <!--/.modal-->
+		
+		<div ng-include="'views/device_alarm.html'"></div>
+		
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

@@ -1,0 +1,166 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">打印机管理</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<!--<button type="button" class="btn btn-success"-->
+					<!--ng-click="createPrinter()">新增打印机</button>-->
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover"
+						id="printerTable">
+						<thead>
+							<tr>
+								<th data-field="printDevSn" data-sort-name="printDevSn" data-sortable="true">打印机SN</th>
+								<th data-field="printerType" data-sort-name="printerType" data-sortable="true">打印机类型</th>
+								<th data-field="printStatus" data-sort-name="printStatus" data-sortable="true">打印机状态</th>
+								<th data-field="firmwareVersion" data-sort-name="firmwareVersion" data-sortable="true">固件版本</th>
+								<th data-field="inkboxSn" data-sort-name="inkboxSn" data-sortable="true">墨水箱SN</th>
+								<th data-field="inkboxStatus" data-sort-name="inkboxStatus" data-sortable="true">墨水箱状态</th>
+								<th data-field="printInnerIp" data-sort-name="printInnerIp" data-sortable="true">打印机ip</th>
+								<th data-field="wifiName" data-sort-name="wifiName" data-sortable="true">wifi名称</th>
+								<th data-field="printerModel" data-sort-name="printerModel" data-sortable="true">打印机模型</th>
+								<!--<th data-field="product_version" data-sortable="true">固件版本</th>-->
+								<!--<th data-field="locked" data-sortable="true">是否锁定</th>-->
+								<!--<th data-field="online" data-sortable="true">是否在线</th>-->
+								<th data-field="id">操作</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+
+		 <!--Modal-->
+		<div class="modal fade" id="printerViewModal" tabindex="-1" role="dialog"
+			aria-labelledby="editModalLabel" aria-hidden="true" style="overflow:auto">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="viewModalLabel">打印机查看</h4>
+					</div>
+					<div class="modal-body">
+						<form name="printerForm" class="form-horizontal" novalidate>
+							<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+
+							<div class="form-group">
+								<label for="printDevSn" class="col-sm-3 control-label">打印机SN</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printDevSn}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printerModel" class="col-sm-3 control-label">打印机模型</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printerModel}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="wifiName" class="col-sm-3 control-label">产品型号</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.wifiName}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="totalPaperCount" class="col-sm-3 control-label">总页数</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.totalPaperCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="totalCount" class="col-sm-3 control-label">总数</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.totalCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="tonerRemain" class="col-sm-3 control-label">调色剂剩余</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.tonerRemain}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printStatus" class="col-sm-3 control-label">打印机状态</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printStatus}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printInnerIp" class="col-sm-3 control-label">打印机内置 ip</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.printInnerIp}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inkboxSn" class="col-sm-3 control-label">墨水盒sn</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.inkboxSn}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inkboxPrintedCount" class="col-sm-3 control-label">墨水盒打印数量</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.inkboxPrintedCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="inkboxRemainPrintCount" class="col-sm-3 control-label">墨水盒剩余打印数量</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.inkboxRemainPrintCount}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="firmwareVersion" class="col-sm-3 control-label">固件版本</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.firmwareVersion}}</p>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="updateTime" class="col-sm-3 control-label">最近更新时间</label>
+								<div class="col-sm-9">
+									<p class="form-control-static ">{{printer.updateTime}}</p>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		 <!--/.modal-->
+		
+		<div ng-include="'views/device_alarm.html'"></div>
+		
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

@@ -1,0 +1,41 @@
+
+spring:
+  application.name: mobile-print-console
+#  application.name: base
+  profiles.active: pretest
+
+eureka.instance.metadata-map.zone: delicloud
+
+---
+spring:
+  profiles: dev
+  cloud:
+    config:
+      label: master
+      profile: dev
+      uri: http://101.132.113.129:8888
+#      uri: http://test2.delicloud.cn:8888
+---
+spring:
+  profiles: pretest
+  cloud:
+    config:
+      label: master
+      profile: pretest
+      uri: http://101.132.113.129:8888
+---
+spring:
+  profiles: test
+  cloud:
+    config:
+      label: master
+      profile: test
+      uri: http://172.19.101.51:8888
+---
+spring:
+  profiles: product
+  cloud:
+    config:
+      label: master
+      profile: product
+      uri: http://config.delicloud.com

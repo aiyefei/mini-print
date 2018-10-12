@@ -1,0 +1,168 @@
+<div class="row">
+	<div class="col-lg-12">
+		<h1 class="page-header">打印机固件管理</h1>
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<button type="button" class="btn btn-success"
+					ng-click="createPrinterFirmwareUpgrade()">发布升级</button>
+			</div>
+			<!-- /.panel-heading -->
+			<div class="panel-body">
+
+				<div class="dataTable_wrapper">
+					<table class="table table-striped table-bordered table-hover"
+						id="printerFirmwareTable">
+						<thead>
+							<tr>
+								<th data-field="firmwareName" data-sort-name="firmwareName" data-sortable="true">固件名称</th>
+								<th data-field="firmwareVersion" data-sort-name="firmwareVersion" data-sortable="true">固件版本号</th>
+								<th data-field="printerModel" data-sort-name="printerModel" data-sortable="true">打印机模型</th>
+								<th data-field="printerType" data-sort-name="printerType" data-sortable="true">打印机类型</th>
+								<th data-field="firmwareUrl" data-sort-name="firmwareUrl" data-sortable="true">固件链接地址</th>
+								<th data-field="signKey" data-sort-name="signKey" data-sortable="true">签名 key</th>
+								<th data-field="firmwareContext" data-sort-name="firmwareContext" data-sortable="true">固件说明</th>
+								<th data-field="firmwareSize" data-sort-name="firmwareSize" data-sortable="true">固件大小</th>
+								<th data-field="status" data-sort-name="status" data-sortable="true">状态</th>
+								<!--<th data-field="id">操作</th>-->
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+			<!-- /.panel-body -->
+		</div>
+
+		<div class="modal fade" id="printerFirmwareUpgradeModal" tabindex="-1"
+			 role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="editModalLabel">发布升级</h4>
+					</div>
+					<div class="modal-body">
+						<form name="printerFirmwareForm" class="form-horizontal" novalidate>
+							<div class="alert alert-danger" ng-show="error">{{errMsg}}</div>
+							<input type="hidden" name="id" ng-model="printerFirmware.id" />
+
+							<div class="form-group"
+								 ng-class="{ 'has-error' : printerFirmwareForm.firmwareName.$invalid && !printerFirmwareForm.firmwareName.$pristine }">
+								<label for="firmwareName" class="col-sm-3 control-label">固件名称</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="firmwareName"
+										   ng-model="printerFirmware.firmwareName" required>
+								</div>
+							</div>
+
+							<div class="form-group"
+								 ng-class="{ 'has-error' : printerFirmwareForm.firmwareVersion.$invalid && !printerFirmwareForm.firmwareVersion.$pristine }">
+								<label for="firmwareVersion" class="col-sm-3 control-label">固件版本号</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="firmwareVersion"
+										   ng-model="printerFirmware.firmwareVersion" required>
+								</div>
+							</div>
+
+							<div class="form-group"
+								 ng-class="{ 'has-error' : printerFirmwareForm.printerModel.$invalid && !printerFirmwareForm.printerModel.$pristine }">
+								<label for="printerModel" class="col-sm-3 control-label">打印机模型</label>
+								<div class="col-sm-9">
+									<input type="text" class="form-control" name="printerModel"
+										   ng-model="printerFirmware.printerModel" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="printerType" class="col-sm-3 control-label">打印机类型</label>
+								<div class="col-sm-6">
+									<select class="form-control" name="printerType" ng-model="printerFirmware.printerType" required>
+										<option value="">请选择</option>
+										<!--<option ng-repeat="x in upgradeTypes" value="{{x.code}}">{{x.text}}</option>-->
+										<option value="IOS">IOS</option>
+										<option value="Android">Android</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="file" class="col-sm-3 control-label">升级文件</label>
+								<div class="col-sm-6">
+									<!--<a ng-href="{{printerFirmware.downloadUrl}}" ng-show="printerFirmware.downloadUrl">{{printerFirmware.downloadUrl}}</a>-->
+									<button class="button" ngf-select="uploadUpgradeFile($file)" ngf-max-size="100MB">选择文件</button>
+									<br /> <br />
+									<div class="progress" ng-show="upgradeProgress > 0">
+										<div class="progress-bar" role="progressbar"
+											 aria-valuenow="{{upgradeProgress}}" aria-valuemin="0"
+											 aria-valuemax="100" style="width: {{upgradeProgress}}%">
+											<span class="sr-only">{{upgradeProgress}}% 完成</span>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group"
+								 ng-class="{ 'has-error' : printerFirmwareForm.firmwareUrl.$invalid && !printerFirmwareForm.firmwareUrl.$pristine }">
+								<label for="firmwareUrl" class="col-sm-3 control-label">固件链接地址</label>
+								<div class="col-sm-9">
+									<input type="url" class="form-control" name="firmwareUrl"
+										   ng-model="printerFirmware.firmwareUrl" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="firmwareSize" class="col-sm-3 control-label">固件大小</label>
+								<div class="col-sm-6">
+									<input type="text" class="form-control" name="firmwareSize"
+										   ng-model="printerFirmware.firmwareSize" required>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="firmwareContext" class="col-sm-3 control-label">固件说明</label>
+								<div class="col-sm-9">
+									<textarea class="form-control" name="firmwareContext"
+											  ng-model="printerFirmware.firmwareContext" rows="3" placeholder="请输入固件说明内容" required></textarea>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label for="status" class="col-sm-3 control-label">状态</label>
+								<div class="col-sm-6">
+									<select class="form-control" name="status" ng-model="printerFirmware.status" required>
+										<option value="">请选择</option>
+										<!--<option ng-repeat="x in upgradeTypes" value="{{x.code}}">{{x.text}}</option>-->
+										<option value="1">正常</option>
+										<option value="0">禁用</option>
+									</select>
+								</div>
+							</div>
+
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary"
+								ng-click="savePrinterFirmware()"
+								ng-disabled="printerFirmwareForm.$invalid">发布</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</div>
+			<!-- /.modal-dialog -->
+		</div>
+		<!-- /.modal -->
+		
+		<!--<div ng-include="'views/device_alarm.html'"></div>-->
+		
+		<!-- /.panel -->
+	</div>
+	<!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
